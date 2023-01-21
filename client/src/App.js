@@ -1,13 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { useMessage } from './hooks/use-message';
 
-function App() {
+const queryClient = new QueryClient();
+
+const AppContainer = () => (
+  <QueryClientProvider client={queryClient}>
+    <AppContent />
+  </QueryClientProvider>
+)
+
+
+const AppContent = () => {
+  const { data: message } = useMessage();
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          {message}
         </p>
         <a
           className="App-link"
@@ -22,4 +34,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppContainer;
