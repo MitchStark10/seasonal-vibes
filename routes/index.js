@@ -1,12 +1,20 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const path = require('path');
 
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function (req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 router.get('/api', (req, res) => {
   res.status(200).json({ message: 'Hello from server!' });
 })
+
+router.use(express.static(path.join(__dirname, '../client/build')));
+
+// All other GET requests not handled before will return our React app
+router.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 module.exports = router;
