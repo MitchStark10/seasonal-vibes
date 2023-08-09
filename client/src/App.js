@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
 
-const LOGIN_URL = process.env.REACT_APP_LOGIN_URL || "/login";
+const LOGIN_URL = process.env.REACT_APP_LOGIN_URL || "/auth/login";
 
 const queryClient = new QueryClient();
 
