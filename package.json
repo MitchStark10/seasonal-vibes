@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev:client": "cd client && npm run start",
-    "dev": "concurrently --kill-others \"cross-env PORT=3001 npm run dev:client\" \"npm run start\"",
+    "dev": "concurrently --kill-others \"cross-env PORT=3001 REACT_APP_LOGIN_URL=http://localhost:3000/login npm run dev:client\" \"npm run start\"",
     "start": "node app",
     "build": "cd client && npm i && npm run build",
     "postinstall": "cd client && npm i"
@@ -12,6 +12,7 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.3.1",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
