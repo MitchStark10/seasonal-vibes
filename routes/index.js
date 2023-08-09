@@ -9,8 +9,6 @@ app.get("/ping", (_req, res) => {
     .json({ message: "API request succeeded. May the force be with you." });
 });
 
-app.use("/auth", require("./auth"));
-
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 // All other GET requests not handled before will return our React app

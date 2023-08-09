@@ -1,5 +1,5 @@
 const express = require("express");
-const app = express();
+const app = express.Router();
 
 const client_id = process.env.CLIENT_ID;
 const redirect_uri = process.env.REDIRECT_URI;
@@ -15,7 +15,7 @@ const generateRandomString = (length) => {
   return text;
 };
 
-app.get("/login", (_req, res) => {
+app.get("/", (_req, res) => {
   const state = generateRandomString(16);
   const scope = "user-read-private user-read-email";
 
@@ -30,3 +30,5 @@ app.get("/login", (_req, res) => {
       }).toString()
   );
 });
+
+module.exports = app;

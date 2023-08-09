@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-app.get("/callback", (req, res) => {
+app.get("", (req, res) => {
   const code = req.query.code || null;
   const state = req.query.state || null;
 
