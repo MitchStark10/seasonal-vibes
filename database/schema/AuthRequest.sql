@@ -1,0 +1,4 @@
+CREATE TABLE AuthRequest (
+  Id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+  RequestState VARCHAR(16)
+);

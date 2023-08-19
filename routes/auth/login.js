@@ -1,4 +1,5 @@
 const express = require("express");
+const { RequestState } = require("../../lib/db/RequestState");
 const app = express.Router();
 
 const client_id = process.env.CLIENT_ID;
@@ -15,9 +16,12 @@ const generateRandomString = (length) => {
   return text;
 };
 
-app.get("/", (_req, res) => {
+app.get("/", async (_req, res) => {
   const state = generateRandomString(16);
   const scope = "user-read-private user-read-email";
+
+  const requestState = new RequestState(state);
+  await requestState.persist();
 
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
