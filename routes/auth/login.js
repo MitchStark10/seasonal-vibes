@@ -21,7 +21,11 @@ app.get("/", async (_req, res) => {
   const scope = "user-read-private user-read-email";
 
   const requestState = new RequestState(state);
-  await requestState.persist();
+  const newRequestStateResponse = await requestState.persist();
+
+  if (newRequestStateResponse.err) {
+    return res.status(500).json({ error: "Unable to persist request state" });
+  }
 
   res.redirect(
     "https://accounts.spotify.com/authorize?" +

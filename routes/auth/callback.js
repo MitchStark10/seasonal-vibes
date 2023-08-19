@@ -7,7 +7,10 @@ app.get("/", async (req, res) => {
   const state = req.query.state || null;
 
   const requestState = new RequestState(state);
-  const requestStateQueryResults = await requestState.find();
+  const { resultSet: requestStateQueryResults } = await requestState.find();
+
+  console.log("request state query results", requestStateQueryResults);
+  console.log("running check", requestStateQueryResults.length);
 
   if (requestStateQueryResults.length < 1) {
     return res.state(401).json({ error: "Unable to validate state" });
