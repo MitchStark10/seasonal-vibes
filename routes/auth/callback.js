@@ -1,11 +1,19 @@
 const express = require("express");
+const { RequestState } = require("../../lib/db/RequestState");
 const app = express();
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   const code = req.query.code || null;
   const state = req.query.state || null;
 
-  // TODO: Check the state and store the code
+  const requestState = new RequestState(state);
+  const requestStateQueryResults = await requestState.find();
+
+  if (requestStateQueryResults.length < 1) {
+    return res.state(401).json({ error: "Unable to validate state" });
+  }
+
+  // TODO: Store the code and user email in DB
   return res.redirect("http://localhost:3001/auth_success");
 });
 
