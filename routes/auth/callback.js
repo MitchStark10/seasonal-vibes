@@ -15,8 +15,10 @@ app.get("/", async (req, res) => {
   }
 
   const spotifyClient = new SpotifyClient({ userAuthCode: code });
+
   // TODO: Should we just include this logic in the constructor, to avoid order of operations issues?
   await spotifyClient.getAccessToken();
+  await spotifyClient.getUserData();
 
   // TODO: Return the auth code via a header
   // TODO: Store the code and user email in DB
