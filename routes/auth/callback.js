@@ -1,5 +1,6 @@
 const express = require("express");
 const { RequestState } = require("../../lib/db/RequestState");
+const { SpotifyClient } = require("../../lib/spotify/SpotifyClient");
 const app = express();
 
 app.get("/", async (req, res) => {
@@ -13,6 +14,11 @@ app.get("/", async (req, res) => {
     return res.state(401).json({ error: "Unable to validate state" });
   }
 
+  const spotifyClient = new SpotifyClient({ userAuthCode: code });
+  // TODO: Should we just include this logic in the constructor, to avoid order of operations issues?
+  await spotifyClient.getAccessToken();
+
+  // TODO: Return the auth code via a header
   // TODO: Store the code and user email in DB
   return res.redirect("http://localhost:3001/auth_success");
 });
