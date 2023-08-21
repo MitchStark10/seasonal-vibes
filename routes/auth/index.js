@@ -1,7 +1,10 @@
-const express = require("express");
+import express from "express";
+import loginRoutes from "./login.js";
+import callbackRoutes from "./callback.js";
+
 const app = express();
 
-app.use("/login", require("./login"));
-app.use("/callback", require("./callback"));
+app.use("/login", loginRoutes);
+app.use("/callback", callbackRoutes);
 
-module.exports = app;
+export default app;

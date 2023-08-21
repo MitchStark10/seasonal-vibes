@@ -1,6 +1,7 @@
-const express = require("express");
-const { RequestState } = require("../../lib/db/RequestState");
-const { SpotifyClient } = require("../../lib/spotify/SpotifyClient");
+import express from "express";
+import { RequestState } from "../../lib/db/RequestState.js";
+import { SpotifyClient } from "../../lib/spotify/SpotifyClient.js";
+
 const app = express();
 
 app.get("/", async (req, res) => {
@@ -25,4 +26,4 @@ app.get("/", async (req, res) => {
   return res.redirect("http://localhost:3001/auth_success");
 });
 
-module.exports = app;
+export default app;

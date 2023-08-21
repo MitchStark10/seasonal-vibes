@@ -1,7 +1,10 @@
-const express = require("express");
+import express from "express";
+import path from "path";
+import dotenv from "dotenv";
+import { __dirname } from "../lib/utils/dirname.js";
+
 const app = express();
-const path = require("path");
-require("dotenv").config();
+dotenv.config();
 
 app.get("/ping", (_req, res) => {
   res
@@ -16,4 +19,4 @@ app.get("*", (_req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
 
-module.exports = app;
+export default app;

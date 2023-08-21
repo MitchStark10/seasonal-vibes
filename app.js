@@ -1,12 +1,14 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+// TODO: Transform all require statements to import
+import createError from "http-errors";
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import indexRouter from "./routes/index.js";
+import { __dirname } from "./lib/utils/dirname.js";
+import authRoutes from "./routes/auth/index.js";
 
-var indexRouter = require("./routes/index");
-
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -18,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/auth", require("./routes/auth"));
+app.use("/auth", authRoutes);
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler

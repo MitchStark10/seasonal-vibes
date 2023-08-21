@@ -1,5 +1,6 @@
-const express = require("express");
-const { RequestState } = require("../../lib/db/RequestState");
+import express from "express";
+import { RequestState } from "../../lib/db/RequestState.js";
+
 const app = express.Router();
 
 const client_id = process.env.CLIENT_ID;
@@ -39,4 +40,4 @@ app.get("/", async (_req, res) => {
   );
 });
 
-module.exports = app;
+export default app;
