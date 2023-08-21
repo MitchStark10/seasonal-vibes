@@ -1,6 +1,7 @@
 import express from "express";
 import { RequestState } from "../../lib/db/RequestState.js";
 import { SpotifyClient } from "../../lib/spotify/SpotifyClient.js";
+import { QuarterlyVibesUser } from "../../lib/db/QuarterlyVibesUser.js";
 
 const app = express();
 
@@ -15,15 +16,17 @@ app.get("/", async (req, res) => {
     return res.state(401).json({ error: "Unable to validate state" });
   }
 
-  const spotifyClient = new SpotifyClient({ userAuthCode: code });
+  const spotifyClient = new SpotifyClient({
+    userAuthCode: code,
+  });
+  await spotifyClient.fetchAccessToken();
+  const userData = await spotifyClient.fetchUserData();
+  const user = new QuarterlyVibesUser(userData);
+  await user.persist();
 
-  // TODO: Should we just include this logic in the constructor, to avoid order of operations issues?
-  await spotifyClient.getAccessToken();
-  await spotifyClient.getUserData();
-
-  // TODO: Return the auth code via a header
+  // TODO: Return the auth code via a cookie
   // TODO: Store the code and user email in DB
-  return res.redirect("http://localhost:3001/auth_success");
+  return res.redirect(process.env.FRONTEND_REDIRECT_URI_AFTER_CALLBACK);
 });
 
 export default app;
