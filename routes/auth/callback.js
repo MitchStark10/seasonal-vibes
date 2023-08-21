@@ -24,8 +24,10 @@ app.get("/", async (req, res) => {
   const user = new QuarterlyVibesUser(userData);
   await user.persist();
 
-  // TODO: Return the auth code via a cookie
-  // TODO: Store the code and user email in DB
+  res.cookie("spotifyRefreshToken", userData.refreshToken, {
+    maxAge: 900000,
+    httpOnly: true,
+  });
   return res.redirect(process.env.FRONTEND_REDIRECT_URI_AFTER_CALLBACK);
 });
 
