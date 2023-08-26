@@ -19,7 +19,6 @@ app.get("/", async (req, res) => {
   const spotifyClient = new SpotifyClient({
     userAuthCode: code,
   });
-  await spotifyClient.fetchAccessToken();
   const userData = await spotifyClient.fetchUserData();
   const user = new QuarterlyVibesUser(userData);
   await user.persist();
