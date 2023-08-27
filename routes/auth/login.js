@@ -19,7 +19,7 @@ const generateRandomString = (length) => {
 
 app.get("/", async (_req, res) => {
   const state = generateRandomString(16);
-  const scope = "user-read-private user-read-email";
+  const scope = "user-read-private user-read-email playlist-modify-public";
 
   const requestState = new RequestState(state);
   const newRequestStateResponse = await requestState.persist();
