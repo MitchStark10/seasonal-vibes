@@ -8,7 +8,8 @@
     "dev": "concurrently --kill-others \"cross-env PORT=3001 REACT_APP_LOGIN_URL=http://localhost:3000/auth/login npm run dev:client\" \"npm run start\"",
     "start": "nodemon app",
     "build": "cd client && npm i && npm run build",
-    "postinstall": "cd client && npm i"
+    "postinstall": "cd client && npm i",
+    "generatePlaylists": "node ./cron/createScheduledPlaylist.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
