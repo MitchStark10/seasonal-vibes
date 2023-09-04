@@ -2,8 +2,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
 import { Header } from "./components/Header";
 import { SpotifyButton } from "./components/SpotifyButton";
-
-const LOGIN_URL = process.env.REACT_APP_LOGIN_URL || "/auth/login";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./components/Theme";
 
 const queryClient = new QueryClient();
 
@@ -15,10 +15,10 @@ const AppContainer = () => (
 
 const AppContent = () => {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Header />
       <SpotifyButton />
-    </div>
+    </ThemeProvider>
   );
 };
 
