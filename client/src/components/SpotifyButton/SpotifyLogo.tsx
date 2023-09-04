@@ -1,8 +1,8 @@
 import { styled } from "@mui/material";
+import React from "react";
 import SpotifyLogoBlack from "./Spotify_Logo_CMYK_Black.png";
 import SpotifyLogoGreen from "./Spotify_Logo_CMYK_Green.png";
 import SpotifyLogoWhite from "./Spotify_Logo_CMYK_White.png";
-import React from "react";
 
 interface Props {
   variant?: "black" | "green" | "white";

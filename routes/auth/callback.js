@@ -25,7 +25,6 @@ app.get("/", async (req, res) => {
 
   res.cookie("spotifyRefreshToken", userData.refreshToken, {
     maxAge: 900000,
-    httpOnly: true,
   });
   return res.redirect(process.env.FRONTEND_REDIRECT_URI_AFTER_CALLBACK);
 });

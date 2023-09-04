@@ -1,15 +1,23 @@
-import { Button, css, styled } from "@mui/material";
+import { Button, styled } from "@mui/material";
 import { SpotifyLogo } from "./SpotifyLogo";
 
 const LOGIN_URL = process.env.REACT_APP_LOGIN_URL || "/auth/login";
 
+const StyledButtonContainer = styled(Button)({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "10px",
+  maxWidth: "250px",
+  textDecoration: "none",
+});
+
 export const SpotifyButton = () => {
   return (
     <div>
-      <p>Get started with: </p>
-      <Button variant="contained" href={LOGIN_URL}>
-        <SpotifyLogo />
-      </Button>
+      <StyledButtonContainer variant="contained" href={LOGIN_URL}>
+        <b>Log in with</b> <SpotifyLogo />
+      </StyledButtonContainer>
     </div>
   );
 };

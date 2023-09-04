@@ -6,4 +6,9 @@ export const theme = createTheme({
       main: "#1DB954",
     },
   },
+  typography: {
+    button: {
+      fontWeight: "bold",
+    },
+  },
 });
