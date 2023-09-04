@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import { Header } from "./components/Header";
 import { theme } from "./components/Theme";
@@ -18,6 +19,7 @@ const AppContainer = () => (
 const AppContent = () => {
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer />
       <Header />
       <BrowserRouter>
         <Routes>

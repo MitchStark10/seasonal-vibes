@@ -1,12 +1,13 @@
 // TODO: Transform all require statements to import
-import createError from "http-errors";
-import express from "express";
-import path from "path";
 import cookieParser from "cookie-parser";
+import express from "express";
+import createError from "http-errors";
 import logger from "morgan";
-import indexRouter from "./routes/index.js";
+import path from "path";
 import { __dirname } from "./lib/utils/dirname.js";
 import authRoutes from "./routes/auth/index.js";
+import indexRouter from "./routes/index.js";
+import settingsRouter from "./routes/settings/index.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/auth", authRoutes);
+app.use("/settings", settingsRouter);
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler

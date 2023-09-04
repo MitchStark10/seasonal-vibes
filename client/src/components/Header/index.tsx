@@ -1,4 +1,5 @@
 import { Button, styled } from "@mui/material";
+import { SPOTIFY_REFRESH_TOKEN_HEADER_KEY } from "../../lib/constants";
 import { getCookieValue } from "../../lib/getCookieValue";
 import { SpotifyButton } from "../SpotifyButton";
 
@@ -28,7 +29,7 @@ const ActionContainer = styled("span")({
 });
 
 export const Header = () => {
-  const refreshToken = getCookieValue("spotifyRefreshToken");
+  const refreshToken = getCookieValue(SPOTIFY_REFRESH_TOKEN_HEADER_KEY);
 
   return (
     <StyledHeaderContainer>
