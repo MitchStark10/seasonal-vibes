@@ -1,5 +1,7 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
+import { Header } from "./components/Header";
+import { SpotifyButton } from "./components/SpotifyButton";
 
 const LOGIN_URL = process.env.REACT_APP_LOGIN_URL || "/auth/login";
 
@@ -14,8 +16,8 @@ const AppContainer = () => (
 const AppContent = () => {
   return (
     <div>
-      Hello world
-      <a href={LOGIN_URL}>Login to spotify</a>
+      <Header />
+      <SpotifyButton />
     </div>
   );
 };
