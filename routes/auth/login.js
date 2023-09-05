@@ -4,7 +4,7 @@ import { RequestState } from "../../lib/db/RequestState.js";
 const app = express.Router();
 
 const client_id = process.env.CLIENT_ID;
-const redirect_uri = process.env.REDIRECT_URI;
+const redirect_uri = process.env.BACKEND_DOMAIN + "/auth/callback";
 
 const generateRandomString = (length) => {
   let text = "";
