@@ -3,14 +3,14 @@ import { toast } from "react-toastify";
 import { SPOTIFY_REFRESH_TOKEN_HEADER_KEY } from "../../lib/constants";
 import { getCookieValue } from "../../lib/getCookieValue";
 
-const SETTINGS_API_URI = process.env.SETTINGS_API_URI || "/settings";
+const SETTINGS_API_URI = process.env.REACT_APP_SETTINGS_API_URI || "/settings";
 
 const getHeaders = () => ({
   "Content-Type": "application/json",
   "x-refresh-token": getCookieValue(SPOTIFY_REFRESH_TOKEN_HEADER_KEY),
 });
 
-interface Settings {
+export interface Settings {
   isSubscribed: boolean;
   nextPlaylistCreationDate: string;
 }
@@ -19,23 +19,27 @@ interface Settings {
 // are only used in the Settings page. If the settings were used in other
 // pages, then this will be updated to use a state management library.
 export const useSettings = () => {
+  const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState<Settings | null>(null);
 
   const getSettings = useCallback(async () => {
+    setLoading(true);
     try {
       const geSettingsApiResponse = await fetch(SETTINGS_API_URI, {
         headers: getHeaders(),
       });
       const settings = await geSettingsApiResponse.json();
       setSettings(settings);
-      toast("Settings fetched");
     } catch (error) {
       console.error(error);
-      toast("Unable to retrieve user settings. Please try again later.");
+      toast.error("Unable to retrieve user settings. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   }, []);
 
   const saveSettings = useCallback(async (settings: Settings) => {
+    setLoading(true);
     try {
       const saveSettingsApiResponse = await fetch(SETTINGS_API_URI, {
         method: "POST",
@@ -44,19 +48,21 @@ export const useSettings = () => {
       });
 
       if (saveSettingsApiResponse.ok) {
-        toast("User settings saved successfully.");
+        toast.success("User settings saved successfully.");
         setSettings(settings);
       } else {
         toast("Unable to save user settings. Please try again later.");
       }
     } catch (error) {
       console.error(error);
-      toast("Unable to save user settings. Please try again later.");
+      toast.error("Unable to save user settings. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    if (!settings) {
+    if (!settings && !loading) {
       getSettings();
     }
   }, []);

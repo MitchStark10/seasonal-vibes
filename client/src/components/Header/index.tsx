@@ -15,7 +15,7 @@ const ContentContainer = styled("div")({
   justifyContent: "space-between",
   alignItems: "center",
   gap: "10px",
-  maxWidth: "1400px",
+  maxWidth: "1000px",
   margin: "0 auto",
 });
 
