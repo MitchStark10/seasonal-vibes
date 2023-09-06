@@ -13,12 +13,14 @@ export const SettingsContent: React.FC<Props> = ({
 }) => {
   return (
     <div>
-      <Typography>
-        Your next playlist will be generated on:{" "}
-        {new Date(settings.nextPlaylistCreationDate).toLocaleDateString(
-          "en-US"
-        )}
-      </Typography>
+      {settings.isSubscribed && (
+        <Typography>
+          Your next playlist will be generated on:{" "}
+          {new Date(settings.nextPlaylistCreationDate).toLocaleDateString(
+            "en-US"
+          )}
+        </Typography>
+      )}
       <FormControlLabel
         control={
           <Checkbox

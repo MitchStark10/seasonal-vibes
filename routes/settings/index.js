@@ -1,24 +1,19 @@
 import express from "express";
-import { settingsMiddleware } from "./settingsMiddleware";
+import { settingsMiddleware } from "./settingsMiddleware.js";
 
 const app = express();
 
 app.use(settingsMiddleware);
 
-// TODO: Remove the mocks, and actually build this out
-app.get("/", (req, res) => {
-  res.status(200).json({
-    isSubscribed: res.locals.quarterlyVibesUser.isSubscribed,
-    nextPlaylistCreationDate:
-      res.locals.quarterlyVibesUser.nextPlaylistCreationDate,
-  });
+app.get("/", async (req, res) => {
+  const settings = await res.locals.quarterlyVibesUser.getSettings();
+  res.status(200).json(settings);
 });
 
-app.post("/", (req, res) => {
-  res.status(200).json({
-    subscribed: true,
-    nextPlaylistCreationDate: "2020-12-31T23:59:59.999Z",
-  });
+app.post("/", async (req, res) => {
+  await res.locals.quarterlyVibesUser.updateSettings(req.body);
+  const settings = await res.locals.quarterlyVibesUser.getSettings();
+  res.status(200).json(settings);
 });
 
 export default app;

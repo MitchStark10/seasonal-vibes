@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SPOTIFY_REFRESH_TOKEN_HEADER_KEY } from "../../lib/constants";
 import { getCookieValue } from "../../lib/getCookieValue";
@@ -7,7 +8,7 @@ const SETTINGS_API_URI = process.env.REACT_APP_SETTINGS_API_URI || "/settings";
 
 const getHeaders = () => ({
   "Content-Type": "application/json",
-  "x-refresh-token": getCookieValue(SPOTIFY_REFRESH_TOKEN_HEADER_KEY),
+  "x-spotify-refresh-token": getCookieValue(SPOTIFY_REFRESH_TOKEN_HEADER_KEY),
 });
 
 export interface Settings {
@@ -21,6 +22,7 @@ export interface Settings {
 export const useSettings = () => {
   const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState<Settings | null>(null);
+  const navigate = useNavigate();
 
   const getSettings = useCallback(async () => {
     setLoading(true);
@@ -28,7 +30,14 @@ export const useSettings = () => {
       const geSettingsApiResponse = await fetch(SETTINGS_API_URI, {
         headers: getHeaders(),
       });
+
       const settings = await geSettingsApiResponse.json();
+      if (!geSettingsApiResponse.ok) {
+        toast.error(
+          "Unable to retrieve user settings. Please try again later."
+        );
+        navigate("/");
+      }
       setSettings(settings);
     } catch (error) {
       console.error(error);
@@ -39,6 +48,8 @@ export const useSettings = () => {
   }, []);
 
   const saveSettings = useCallback(async (settings: Settings) => {
+    const prevSettings = { ...settings };
+    setSettings(null);
     setLoading(true);
     try {
       const saveSettingsApiResponse = await fetch(SETTINGS_API_URI, {
@@ -52,10 +63,12 @@ export const useSettings = () => {
         setSettings(settings);
       } else {
         toast("Unable to save user settings. Please try again later.");
+        setSettings(prevSettings);
       }
     } catch (error) {
       console.error(error);
       toast.error("Unable to save user settings. Please try again later.");
+      setSettings(prevSettings);
     } finally {
       setLoading(false);
     }

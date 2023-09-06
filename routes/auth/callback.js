@@ -23,9 +23,7 @@ app.get("/", async (req, res) => {
   const user = new QuarterlyVibesUser(userData);
   await user.persist();
 
-  res.cookie("spotifyRefreshToken", userData.refreshToken, {
-    maxAge: 900000,
-  });
+  res.cookie("spotifyRefreshToken", userData.refreshToken, {});
   return res.redirect(process.env.FRONTEND_DOMAIN + "/settings");
 });
 
