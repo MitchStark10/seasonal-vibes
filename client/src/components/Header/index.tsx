@@ -1,6 +1,7 @@
 import { Button, styled } from "@mui/material";
 import { SPOTIFY_REFRESH_TOKEN_HEADER_KEY } from "../../lib/constants";
 import { getCookieValue } from "../../lib/getCookieValue";
+import { Logo } from "../Logo";
 import { SpotifyButton } from "../SpotifyButton";
 
 const StyledHeaderContainer = styled("header")({
@@ -19,10 +20,6 @@ const ContentContainer = styled("div")({
   margin: "0 auto",
 });
 
-const StyledHeaderText = styled("h1")({
-  margin: "-5px 0 0 0",
-});
-
 const ActionContainer = styled("span")({
   display: "flex",
   gap: "10px",
@@ -34,7 +31,9 @@ export const Header = () => {
   return (
     <StyledHeaderContainer>
       <ContentContainer>
-        <StyledHeaderText>seasonalvibes</StyledHeaderText>
+        <a href="/">
+          <Logo />
+        </a>
         <ActionContainer>
           {refreshToken ? (
             <Button variant="contained" href="/settings">
