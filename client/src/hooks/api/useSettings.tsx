@@ -36,6 +36,7 @@ export const useSettings = () => {
         toast.error(
           "Unable to retrieve user settings. Please try again later."
         );
+        document.cookie = `${SPOTIFY_REFRESH_TOKEN_HEADER_KEY}=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
         navigate("/");
       }
       setSettings(settings);
