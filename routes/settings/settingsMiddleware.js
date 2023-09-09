@@ -3,7 +3,7 @@ import { QuarterlyVibesUser } from "../../lib/db/QuarterlyVibesUser.js";
 import { connectAndQuery } from "../../lib/db/connectAndQuery.js";
 
 const GET_USER_BY_REFRESH_TOKEN_SQL = `
-SELECT *
+SELECT Email, IsSubscribed
 FROM QuarterlyVibesUser
 WHERE SpotifyRefreshToken = @refreshToken`;
 
@@ -19,6 +19,8 @@ export const settingsMiddleware = async (req, res, next) => {
     return res.status(401).json({ error: "No refresh token provided." });
   }
 
+  const start = Date.now();
+
   const { resultSet } = await connectAndQuery(GET_USER_BY_REFRESH_TOKEN_SQL, [
     {
       key: "refreshToken",
@@ -26,6 +28,9 @@ export const settingsMiddleware = async (req, res, next) => {
       value: refreshToken,
     },
   ]);
+
+  const end = Date.now();
+  console.log(`Execution time of middlware query: ${end - start} ms`);
 
   if (resultSet?.length !== 1) {
     console.log("Unexpected results for refresh token.");
@@ -38,6 +43,7 @@ export const settingsMiddleware = async (req, res, next) => {
     email: userData.Email,
     userId: userData.SpotifyUserId,
     refreshToken: userData.SpotifyRefreshToken,
+    isSubscribed: userData.IsSubscribed,
   });
 
   next();
