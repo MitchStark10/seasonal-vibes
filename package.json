@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev:client": "cd client && npm run start",
-    "dev": "concurrently --kill-others \"cross-env PORT=3001 REACT_APP_LOGIN_URL=http://localhost:3000/auth/login SETTINGS_API_URI=http://localhost:3000/settings npm run dev:client\" \"npm run start\"",
-    "start": "nodemon app",
+    "dev": "concurrently --kill-others \"cross-env PORT=3001 REACT_APP_LOGIN_URL=http://localhost:3000/auth/login SETTINGS_API_URI=http://localhost:3000/settings npm run dev:client\" \"npm run devStart\"",
+    "devStart": "nodemon app",
+    "start": "node app",
     "build": "cd client && npm i && npm run build",
     "postinstall": "cd client && npm i",
     "generatePlaylists": "node ./cron/createScheduledPlaylist.js"
