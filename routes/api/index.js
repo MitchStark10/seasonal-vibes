@@ -5,6 +5,6 @@ import settingRouter from "./settings/index.js";
 const app = express();
 
 app.use("/auth", authRouter);
-app.use("/setting", settingRouter);
+app.use("/settings", settingRouter);
 
 export default app;
