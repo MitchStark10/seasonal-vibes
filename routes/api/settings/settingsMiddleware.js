@@ -1,6 +1,6 @@
 import sql from "mssql";
-import { QuarterlyVibesUser } from "../../lib/db/QuarterlyVibesUser.js";
-import { connectAndQuery } from "../../lib/db/connectAndQuery.js";
+import { QuarterlyVibesUser } from "../../../lib/db/QuarterlyVibesUser.js";
+import { connectAndQuery } from "../../../lib/db/connectAndQuery.js";
 
 const GET_USER_BY_REFRESH_TOKEN_SQL = `
 SELECT Email, IsSubscribed

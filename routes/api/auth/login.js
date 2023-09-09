@@ -1,10 +1,10 @@
 import express from "express";
-import { RequestState } from "../../lib/db/RequestState.js";
+import { RequestState } from "../../../lib/db/RequestState.js";
 
 const app = express.Router();
 
 const client_id = process.env.CLIENT_ID;
-const redirect_uri = process.env.BACKEND_DOMAIN + "/auth/callback";
+const redirect_uri = process.env.BACKEND_DOMAIN + "/api/auth/callback";
 
 const generateRandomString = (length) => {
   let text = "";

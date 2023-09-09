@@ -1,10 +1,8 @@
 import cookieParser from "cookie-parser";
 import express from "express";
 import path from "path";
-import { __dirname } from "./lib/utils/dirname.js";
-import authRoutes from "./routes/auth/index.js";
-import indexRouter from "./routes/index.js";
-import settingsRouter from "./routes/settings/index.js";
+import { __dirname } from "./dirname.js";
+import apiRouter from "./routes/api/index.js";
 
 const app = express();
 
@@ -16,19 +14,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/auth", authRoutes);
-app.use("/settings", settingsRouter);
-app.use("/", indexRouter);
+app.use("/api", apiRouter);
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+app.get("/ping", (_req, res) => {
+  res
+    .status(200)
+    .json({ message: "API request succeeded. May the force be with you." });
+});
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+// All other GET requests not handled before will return our React app
+app.get("*", (_req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
 const PORT = process.env.PORT || 3000;

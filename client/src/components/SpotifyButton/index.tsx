@@ -1,7 +1,7 @@
 import { Button, styled } from "@mui/material";
 import { SpotifyLogo } from "./SpotifyLogo";
 
-const LOGIN_URL = process.env.REACT_APP_LOGIN_URL || "/auth/login";
+const LOGIN_URL = process.env.REACT_APP_LOGIN_URL || "/api/auth/login";
 
 const StyledButtonContainer = styled(Button)({
   display: "flex",

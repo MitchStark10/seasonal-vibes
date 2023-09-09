@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 import { SPOTIFY_REFRESH_TOKEN_HEADER_KEY } from "../../lib/constants";
 import { getCookieValue } from "../../lib/getCookieValue";
 
-const SETTINGS_API_URI = process.env.REACT_APP_SETTINGS_API_URI || "/settings";
+const SETTINGS_API_URI =
+  process.env.REACT_APP_SETTINGS_API_URI || "/api/settings";
 
 const getHeaders = () => ({
   "Content-Type": "application/json",
