@@ -8,12 +8,19 @@ const app = express();
 app.get("/", async (req, res) => {
   const code = req.query.code || null;
   const state = req.query.state || null;
+  const error = req.query.error || null;
+
+  if (error) {
+    console.log("Recevied error from spotify", error);
+    return res.redirect(process.env.FRONTEND_DOMAIN + "/accessDenied");
+  }
 
   const requestState = new RequestState(state);
   const { resultSet: requestStateQueryResults } = await requestState.find();
 
   if (requestStateQueryResults.length < 1) {
-    return res.state(401).json({ error: "Unable to validate state" });
+    console.log("Unexpeced request state response", requestStateQueryResults);
+    return res.redirect(process.env.FRONTEND_DOMAIN + "/accessDenied");
   }
 
   const spotifyClient = new SpotifyClient({

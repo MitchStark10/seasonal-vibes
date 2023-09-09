@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { Header } from "./components/Header";
 import { theme } from "./components/Theme";
+import { AccessDenied } from "./pages/AccessDenied";
 import { Home } from "./pages/Home";
 import { Settings } from "./pages/Settings";
 
@@ -25,6 +26,7 @@ const AppContent = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/settings" element={<Settings />} />
+          <Route path="/accessDenied" element={<AccessDenied />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
