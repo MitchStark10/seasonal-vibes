@@ -49,6 +49,11 @@ jobs:
         with:
           name: node-app
 
+      - name: Unzip artifact
+        run: |
+          unzip node-app.zip
+          rm node-app.zip
+
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -56,4 +61,4 @@ jobs:
           app-name: "seasonalvibes"
           slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DF5CBA85EC494DD195D55F5AAE718BBE }}
-          package: node-app.zip
+          package: .
