@@ -12,10 +12,18 @@ const StyledButtonContainer = styled(Button)({
   textDecoration: "none",
 });
 
-export const SpotifyButton = () => {
+interface Props {
+  variant?: "contained" | "text";
+}
+
+export const SpotifyButton: React.FC<Props> = ({ variant = "contained" }) => {
   return (
     <div>
-      <StyledButtonContainer variant="contained" href={LOGIN_URL}>
+      <StyledButtonContainer
+        color={variant === "contained" ? "primary" : "secondary"}
+        variant={variant}
+        href={LOGIN_URL}
+      >
         <b>Log in with</b> <SpotifyLogo />
       </StyledButtonContainer>
     </div>

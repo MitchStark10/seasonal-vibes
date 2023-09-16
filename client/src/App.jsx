@@ -22,8 +22,8 @@ const AppContent = () => {
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer />
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/settings" element={<Settings />} />
           <Route path="/accessDenied" element={<AccessDenied />} />
