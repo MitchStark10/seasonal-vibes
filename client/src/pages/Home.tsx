@@ -9,6 +9,7 @@ import mobileExamplePlaylistImage from "./playlistExampleMobile.png";
 const ContentContainer = styled("div")({
   marginTop: "40px",
   padding: "0 20px",
+  textAlign: "center",
 });
 
 const CenteredH1 = styled("h1")({
@@ -25,6 +26,7 @@ const CenteredDiv = styled("div")({
 
 const ImageWithRoundedCorners = styled("img")({
   borderRadius: "10px",
+  maxWidth: "calc(100vw - 40px)",
 });
 
 export const Home = () => {
@@ -48,7 +50,7 @@ export const Home = () => {
           }
           alt="Example playlist"
         />
-        <Typography fontSize="20px" marginTop="20px">
+        <Typography fontSize="20px" marginTop="20px" marginBottom="20px">
           To start using seasonalvibes, simply click the &ldquo;Log In With
           Spotify&rdquo; button below!
         </Typography>
