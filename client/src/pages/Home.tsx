@@ -54,15 +54,15 @@ export const Home = () => {
           playlists based on your most played songs of each month. Follow these
           two quick and simple steps, and we&apos;ll take care of creating your
           playlist on the final day of every month!
-          <NumberedListItemContainer>
-            <NumberedListItem number={1}>
-              Sign in with Spotify using the link below
-            </NumberedListItem>
-            <NumberedListItem number={2}>
-              (Optionally) Personalize your settings
-            </NumberedListItem>
-          </NumberedListItemContainer>
         </Typography>
+        <NumberedListItemContainer>
+          <NumberedListItem number={1}>
+            Sign in with Spotify using the link below
+          </NumberedListItem>
+          <NumberedListItem number={2}>
+            (Optionally) Personalize your settings
+          </NumberedListItem>
+        </NumberedListItemContainer>
         <SpotifyButton />
       </CenteredDiv>
       <Typography

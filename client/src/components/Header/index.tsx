@@ -10,7 +10,8 @@ import {
   css,
   styled,
 } from "@mui/material";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { useOutsideClick } from "../../hooks/useClickOutside";
 import { SPOTIFY_REFRESH_TOKEN_HEADER_KEY } from "../../lib/constants";
 import { getCookieValue } from "../../lib/getCookieValue";
 import { Logo } from "../Logo";
@@ -57,7 +58,7 @@ const StyledMenuIconContainer = styled(IconButton)(
 
 export const Header = () => {
   const [showMobileMenuContents, setShowMobileMenuContents] = useState(false);
-  const mobileMenuRef = useRef<HTMLSpanElement>(null);
+  const mobileMenuRef = useOutsideClick(() => setShowMobileMenuContents(false));
   const refreshToken = getCookieValue(SPOTIFY_REFRESH_TOKEN_HEADER_KEY);
 
   return (
