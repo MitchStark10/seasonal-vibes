@@ -38,7 +38,7 @@ export const Home = () => {
     <ContentContainer>
       <CenteredH1>seasonalvibes</CenteredH1>
       <CenteredDiv>
-        <Typography fontSize="36px" fontWeight="bold" marginBottom="10px">
+        <Typography fontSize="28px" fontWeight="bold" margin="10px 0">
           Personalized, Automated Monthly Playlists
         </Typography>
         <ImageWithRoundedCorners
@@ -55,7 +55,7 @@ export const Home = () => {
           two quick and simple steps, and we&apos;ll take care of creating your
           playlist on the final day of every month!
         </Typography>
-        <NumberedListItemContainer>
+        <NumberedListItemContainer sx={{ marginBottom: "30px" }}>
           <NumberedListItem number={1}>
             Sign in with Spotify using the link below
           </NumberedListItem>

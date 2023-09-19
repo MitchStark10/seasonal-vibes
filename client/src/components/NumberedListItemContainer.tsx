@@ -5,6 +5,6 @@ export const NumberedListItemContainer = styled("div")({
   flexDirection: "column",
   alignItems: "flex-start",
   justifyContent: "flex-start",
-  margin: "20px auto",
+  margin: "auto",
   width: "fit-content",
 });
