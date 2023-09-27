@@ -5,7 +5,7 @@ const app = express();
 
 app.use(settingsMiddleware);
 
-app.get("/", async (req, res) => {
+app.get("/", async (_req, res) => {
   const settings = await res.locals.quarterlyVibesUser.getSettings();
   res.status(200).json(settings);
 });
