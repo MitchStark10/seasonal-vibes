@@ -1,4 +1,10 @@
-import { Checkbox, FormControlLabel, Typography } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { Settings } from "../../hooks/api/useSettings";
 
@@ -30,6 +36,10 @@ export const SettingsContent: React.FC<Props> = ({
         }
         label="Subscribed to monthly playlists"
       />
+      <Select value={settings.playlistVisibilityType}>
+        <MenuItem value="public">Public</MenuItem>
+        <MenuItem value="private">Private</MenuItem>
+      </Select>
     </div>
   );
 };

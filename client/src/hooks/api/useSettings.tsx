@@ -15,6 +15,7 @@ const getHeaders = () => ({
 export interface Settings {
   isSubscribed: boolean;
   nextPlaylistCreationDate: string;
+  playlistVisibilityType: "public" | "private";
 }
 
 // There's currently no need for state management, since the settings
