@@ -3,7 +3,7 @@ import { QuarterlyVibesUser } from "../../../lib/db/QuarterlyVibesUser.js";
 import { connectAndQuery } from "../../../lib/db/connectAndQuery.js";
 
 const GET_USER_BY_REFRESH_TOKEN_SQL = `
-SELECT Email, IsSubscribed
+SELECT Email, IsSubscribed, PlaylistVisibilityType
 FROM QuarterlyVibesUser
 WHERE SpotifyRefreshToken = @refreshToken`;
 
@@ -43,7 +43,10 @@ export const settingsMiddleware = async (req, res, next) => {
     email: userData.Email,
     userId: userData.SpotifyUserId,
     refreshToken: userData.SpotifyRefreshToken,
-    isSubscribed: userData.IsSubscribed,
+    settingsCache: {
+      isSubscribed: userData.IsSubscribed,
+      playlistVisibilityType: userData.PlaylistVisibilityType,
+    },
   });
 
   next();

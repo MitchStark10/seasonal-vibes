@@ -8,7 +8,7 @@ import { Header } from "./components/Header";
 import { theme } from "./components/Theme";
 import { AccessDenied } from "./pages/AccessDenied";
 import { Home } from "./pages/Home";
-import { Settings } from "./pages/Settings";
+import { SettingsPage } from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +25,7 @@ const AppContent = () => {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="/accessDenied" element={<AccessDenied />} />
           <Route path="/" element={<Home />} />
         </Routes>

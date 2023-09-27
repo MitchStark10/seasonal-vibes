@@ -1,5 +1,5 @@
 import { CircularProgress, styled } from "@mui/material";
-import { useSettings } from "../../hooks/api/useSettings";
+import { Settings, useSettings } from "../../hooks/api/useSettings";
 import { SettingsContent } from "./SettingsContent";
 
 const SettingsContainer = styled("div")({
@@ -10,12 +10,12 @@ const SettingsContainer = styled("div")({
   height: "100%",
 });
 
-export const Settings = () => {
+export const SettingsPage = () => {
   const { settings, saveSettings } = useSettings();
 
-  const handleSubscriptionChange = (isSubscribed: boolean) => {
+  const handleSettingsChange = (settings: Settings) => {
     if (settings) {
-      saveSettings({ ...settings, isSubscribed });
+      saveSettings({ ...settings });
     }
   };
 
@@ -25,7 +25,7 @@ export const Settings = () => {
       {settings ? (
         <SettingsContent
           settings={settings}
-          handleSubscriptionChange={handleSubscriptionChange}
+          handleSettingsChange={handleSettingsChange}
         />
       ) : (
         <CircularProgress />

@@ -12,10 +12,12 @@ const getHeaders = () => ({
   "x-spotify-refresh-token": getCookieValue(SPOTIFY_REFRESH_TOKEN_HEADER_KEY),
 });
 
+export type PlaylistVisibility = "public" | "private";
+
 export interface Settings {
   isSubscribed: boolean;
   nextPlaylistCreationDate: string;
-  playlistVisibilityType: "public" | "private";
+  playlistVisibilityType: PlaylistVisibility;
 }
 
 // There's currently no need for state management, since the settings
