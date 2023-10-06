@@ -21,7 +21,7 @@ export const Settings = () => {
 
   return (
     <SettingsContainer>
-      <h1>Settings</h1>
+      <h1>Account</h1>
       {settings ? (
         <SettingsContent
           settings={settings}
