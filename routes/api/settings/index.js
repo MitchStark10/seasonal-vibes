@@ -1,9 +1,9 @@
 import express from "express";
-import { settingsMiddleware } from "./settingsMiddleware.js";
+import { authMiddleware } from "../../../lib/middleware/authMiddleware.js";
 
 const app = express();
 
-app.use(settingsMiddleware);
+app.use(authMiddleware);
 
 app.get("/", async (req, res) => {
   const settings = await res.locals.quarterlyVibesUser.getSettings();

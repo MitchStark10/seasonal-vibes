@@ -1,15 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { SPOTIFY_REFRESH_TOKEN_HEADER_KEY } from "../../lib/constants";
-import { getCookieValue } from "../../lib/getCookieValue";
-
-const SETTINGS_API_URI =
-  process.env.REACT_APP_SETTINGS_API_URI || "/api/settings";
-
-const getHeaders = () => ({
-  "Content-Type": "application/json",
-  "x-spotify-refresh-token": getCookieValue(SPOTIFY_REFRESH_TOKEN_HEADER_KEY),
-});
+import { SETTINGS_API_URI } from "../../lib/constants";
+import { getHeaders } from "../../lib/getHeaders";
 
 export interface Settings {
   isSubscribed: boolean;
@@ -26,12 +18,12 @@ export const useSettings = () => {
   const getSettings = useCallback(async () => {
     setLoading(true);
     try {
-      const geSettingsApiResponse = await fetch(SETTINGS_API_URI, {
+      const getSettingsApiResponse = await fetch(SETTINGS_API_URI, {
         headers: getHeaders(),
       });
 
-      const settings = await geSettingsApiResponse.json();
-      if (!geSettingsApiResponse.ok) {
+      const settings = await getSettingsApiResponse.json();
+      if (!getSettingsApiResponse.ok) {
         window.location.href = "/";
       }
       setSettings(settings);
