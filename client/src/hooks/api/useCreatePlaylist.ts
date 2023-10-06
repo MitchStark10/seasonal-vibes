@@ -11,6 +11,7 @@ export const useCreatePlaylist = () => {
   const [loading, setLoading] = useState(false);
   const createPlaylist = useCallback(
     async (playlistSettings: PlaylistSettings) => {
+      const response = { success: false };
       setLoading(true);
       try {
         const playlistCreationResponse = await fetch(CREATE_PLAYLIST_API_URI, {
@@ -20,10 +21,16 @@ export const useCreatePlaylist = () => {
         });
 
         const method = playlistCreationResponse.ok ? "success" : "error";
-        toast[method]("Playlist created");
+        const message = playlistCreationResponse.ok
+          ? "Playlist created"
+          : "Unexpected error occurred. Please try again later.";
+        toast[method](message);
+        response.success = true;
       } finally {
         setLoading(false);
       }
+
+      return response;
     },
     []
   );

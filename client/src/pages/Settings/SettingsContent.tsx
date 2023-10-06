@@ -1,12 +1,14 @@
 import {
   Button,
   Checkbox,
+  CircularProgress,
   FormControlLabel,
   TextField,
   Typography,
   styled,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useCreatePlaylist } from "../../hooks/api/useCreatePlaylist";
 import { Settings } from "../../hooks/api/useSettings";
 import { useOutsideClick } from "../../hooks/useClickOutside";
 
@@ -31,10 +33,20 @@ export const SettingsContent: React.FC<Props> = ({
 }) => {
   const [isShowingNewPlaylistForm, setIsShowingNewPlaylistForm] =
     useState(false);
+  const [playlistName, setPlaylistName] = useState("");
 
+  const { createPlaylist, loading } = useCreatePlaylist();
   const generatePlaylistContanerRef = useOutsideClick(() =>
     setIsShowingNewPlaylistForm(false)
   );
+
+  const handlePlaylistCreationClick = async () => {
+    const response = await createPlaylist({ playlistName });
+    if (response.success) {
+      setIsShowingNewPlaylistForm(false);
+      setPlaylistName("");
+    }
+  };
 
   return (
     <SettingsContentContainer>
@@ -69,8 +81,17 @@ export const SettingsContent: React.FC<Props> = ({
         )}
         {isShowingNewPlaylistForm && (
           <NewPlaylistFormContainer ref={generatePlaylistContanerRef}>
-            <TextField label="Playlist Name" />
-            <Button onClick={() => alert("Unimplemented")}>Create</Button>
+            <TextField
+              label="Playlist Name"
+              value={playlistName}
+              onChange={(e) => setPlaylistName(e.target.value)}
+            />
+            <Button
+              onClick={handlePlaylistCreationClick}
+              disabled={!playlistName || loading}
+            >
+              {loading ? <CircularProgress /> : "Create"}
+            </Button>
           </NewPlaylistFormContainer>
         )}
       </div>

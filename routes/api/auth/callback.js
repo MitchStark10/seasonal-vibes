@@ -36,7 +36,7 @@ app.get("/", async (req, res) => {
     await user.persist();
 
     res.cookie("spotifyRefreshToken", userData.refreshToken, {
-      maxAge: 60 * 5 * 1000,
+      maxAge: 60 * 60 * 1000,
     });
     return res.redirect(process.env.FRONTEND_DOMAIN + "/settings");
   } catch (error) {
