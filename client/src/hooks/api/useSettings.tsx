@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SPOTIFY_REFRESH_TOKEN_HEADER_KEY } from "../../lib/constants";
 import { getCookieValue } from "../../lib/getCookieValue";
@@ -23,7 +22,6 @@ export interface Settings {
 export const useSettings = () => {
   const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState<Settings | null>(null);
-  const navigate = useNavigate();
 
   const getSettings = useCallback(async () => {
     setLoading(true);
@@ -34,8 +32,7 @@ export const useSettings = () => {
 
       const settings = await geSettingsApiResponse.json();
       if (!geSettingsApiResponse.ok) {
-        document.cookie = `${SPOTIFY_REFRESH_TOKEN_HEADER_KEY}=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-        navigate("/");
+        window.location.href = "/";
       }
       setSettings(settings);
     } catch (error) {

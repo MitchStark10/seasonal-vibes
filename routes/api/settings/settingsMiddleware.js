@@ -34,6 +34,7 @@ export const settingsMiddleware = async (req, res, next) => {
 
   if (resultSet?.length !== 1) {
     console.log("Unexpected results for refresh token.");
+    res.cookie("spotifyRefreshToken", "", {});
     return res.status(401).json({ error: "Invalid refresh token." });
   }
 
