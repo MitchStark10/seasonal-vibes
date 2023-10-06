@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, Typography } from "@mui/material";
+import { Checkbox, FormControlLabel, Typography, styled } from "@mui/material";
 import React from "react";
 import { Settings } from "../../hooks/api/useSettings";
 
@@ -7,12 +7,16 @@ interface Props {
   handleSubscriptionChange: (isSubscribed: boolean) => void;
 }
 
+const SettingsContentContainer = styled("div")({
+  padding: "10px",
+});
+
 export const SettingsContent: React.FC<Props> = ({
   settings,
   handleSubscriptionChange,
 }) => {
   return (
-    <div>
+    <SettingsContentContainer>
       {settings.isSubscribed && (
         <Typography>
           Your next playlist will be generated on:{" "}
@@ -30,6 +34,6 @@ export const SettingsContent: React.FC<Props> = ({
         }
         label="Subscribed to monthly playlists"
       />
-    </div>
+    </SettingsContentContainer>
   );
 };

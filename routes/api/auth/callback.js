@@ -35,7 +35,9 @@ app.get("/", async (req, res) => {
     const user = new QuarterlyVibesUser(userData);
     await user.persist();
 
-    res.cookie("spotifyRefreshToken", userData.refreshToken, {});
+    res.cookie("spotifyRefreshToken", userData.refreshToken, {
+      maxAge: 60 * 5 * 1000,
+    });
     return res.redirect(process.env.FRONTEND_DOMAIN + "/settings");
   } catch (error) {
     console.error("Error occurred while fetching spotify data", error);
