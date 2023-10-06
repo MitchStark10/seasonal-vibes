@@ -36,15 +36,20 @@ export const SettingsContent: React.FC<Props> = ({
   const [playlistName, setPlaylistName] = useState("");
 
   const { createPlaylist, loading } = useCreatePlaylist();
-  const generatePlaylistContanerRef = useOutsideClick(() =>
-    setIsShowingNewPlaylistForm(false)
+
+  const resetNewPlaylistFormState = () => {
+    setIsShowingNewPlaylistForm(false);
+    setPlaylistName("");
+  };
+
+  const generatePlaylistContanerRef = useOutsideClick(
+    resetNewPlaylistFormState
   );
 
   const handlePlaylistCreationClick = async () => {
     const response = await createPlaylist({ playlistName });
     if (response.success) {
-      setIsShowingNewPlaylistForm(false);
-      setPlaylistName("");
+      resetNewPlaylistFormState();
     }
   };
 
@@ -89,8 +94,12 @@ export const SettingsContent: React.FC<Props> = ({
             <Button
               onClick={handlePlaylistCreationClick}
               disabled={!playlistName || loading}
+              variant="outlined"
             >
               {loading ? <CircularProgress /> : "Create"}
+            </Button>
+            <Button onClick={resetNewPlaylistFormState} color="error">
+              Cancel
             </Button>
           </NewPlaylistFormContainer>
         )}
