@@ -44,6 +44,7 @@ export const SpotifyPlaylistIframe: React.FC<{ playlistId: string }> = ({
     allowFullScreen={false}
     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     loading="lazy"
+    title="Spotify Playlist"
   ></iframe>
 );
 

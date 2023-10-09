@@ -17,5 +17,9 @@ export const Logo: React.FC<Props> = ({
   variant = "white",
   size = "small",
 }) => (
-  <StyledLogo size={size} src={variant === "white" ? whiteLogo : blackLogo} />
+  <StyledLogo
+    size={size}
+    src={variant === "white" ? whiteLogo : blackLogo}
+    alt="Seasonal Vibes Logo"
+  />
 );

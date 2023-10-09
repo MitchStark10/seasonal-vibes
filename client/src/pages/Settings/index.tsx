@@ -28,7 +28,7 @@ export const Settings = () => {
           handleSubscriptionChange={handleSubscriptionChange}
         />
       ) : (
-        <CircularProgress />
+        <CircularProgress aria-label="Loading settings" />
       )}
     </SettingsContainer>
   );

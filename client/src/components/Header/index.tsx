@@ -64,7 +64,7 @@ export const Header = () => {
   return (
     <StyledHeaderContainer>
       <ContentContainer>
-        <StyledLink to="/">
+        <StyledLink to="/" aria-label="Home">
           <Logo />
         </StyledLink>
         <span>
@@ -83,6 +83,7 @@ export const Header = () => {
           <span ref={mobileMenuRef}>
             <StyledMenuIconContainer
               onClick={() => setShowMobileMenuContents(true)}
+              aria-label="Menu"
             >
               <MenuIcon />
             </StyledMenuIconContainer>
