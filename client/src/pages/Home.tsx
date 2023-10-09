@@ -6,7 +6,7 @@ import { SpotifyButton } from "../components/SpotifyButton";
 
 const ContentContainer = styled("div")({
   marginTop: "40px",
-  padding: "0 20px",
+  padding: "0 20px 20px 20px",
   textAlign: "center",
   maxWidth: "1000px",
   margin: "auto",
