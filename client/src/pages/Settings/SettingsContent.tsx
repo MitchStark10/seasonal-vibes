@@ -1,3 +1,4 @@
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Button,
   Checkbox,
@@ -27,6 +28,18 @@ const NewPlaylistFormContainer = styled("div")({
   gap: "10px",
 });
 
+const DeleteButtonContainer = styled(Button)({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: "10px",
+});
+
+// TODO: Put this in a separate file
+const Divider = styled("hr")({
+  margin: "20px 0",
+});
+
 export const SettingsContent: React.FC<Props> = ({
   settings,
   handleSubscriptionChange,
@@ -43,7 +56,7 @@ export const SettingsContent: React.FC<Props> = ({
   };
 
   const generatePlaylistContanerRef = useOutsideClick(
-    resetNewPlaylistFormState
+    resetNewPlaylistFormState,
   );
 
   const handlePlaylistCreationClick = async () => {
@@ -59,7 +72,7 @@ export const SettingsContent: React.FC<Props> = ({
         <Typography>
           Your next playlist will be generated on:{" "}
           {new Date(settings.nextPlaylistCreationDate).toLocaleDateString(
-            "en-US"
+            "en-US",
           )}
         </Typography>
       )}
@@ -103,6 +116,17 @@ export const SettingsContent: React.FC<Props> = ({
             </Button>
           </NewPlaylistFormContainer>
         )}
+      </div>
+      <Divider />
+      <div>
+        <DeleteButtonContainer variant="outlined" color="error">
+          <DeleteIcon sx={{ marginRight: "10px" }} />
+          Delete seasonalvibes account
+        </DeleteButtonContainer>
+        <Typography>
+          Deleting your seasonalvibes account will not impact your Spotify
+          account in any way.
+        </Typography>
       </div>
     </SettingsContentContainer>
   );
