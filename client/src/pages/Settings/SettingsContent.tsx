@@ -59,7 +59,7 @@ export const SettingsContent: React.FC<Props> = ({
   };
 
   const generatePlaylistContanerRef = useOutsideClick(
-    resetNewPlaylistFormState,
+    resetNewPlaylistFormState
   );
 
   const handlePlaylistCreationClick = async () => {
@@ -75,7 +75,7 @@ export const SettingsContent: React.FC<Props> = ({
         <Typography>
           Your next playlist will be generated on:{" "}
           {new Date(settings.nextPlaylistCreationDate).toLocaleDateString(
-            "en-US",
+            "en-US"
           )}
         </Typography>
       )}

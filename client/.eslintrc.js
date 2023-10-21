@@ -28,5 +28,6 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
   },
 };
