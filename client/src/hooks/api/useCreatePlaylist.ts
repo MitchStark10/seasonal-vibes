@@ -1,33 +1,28 @@
-import { useCallback, useState } from "react";
-import { toast } from "react-toastify";
+import { useCallback } from "react";
 import { CREATE_PLAYLIST_API_URI } from "../../lib/constants";
 import { getHeaders } from "../../lib/getHeaders";
+import { useAPI } from "./useAPI";
 
 interface PlaylistSettings {
   playlistName: string;
 }
 
 export const useCreatePlaylist = () => {
-  const [loading, setLoading] = useState(false);
+  const { makeRequest, loading } = useAPI();
   const createPlaylist = useCallback(
     async (playlistSettings: PlaylistSettings) => {
       const response = { success: false };
-      setLoading(true);
-      try {
-        const playlistCreationResponse = await fetch(CREATE_PLAYLIST_API_URI, {
+      const playlistCreationResponse = await makeRequest(
+        CREATE_PLAYLIST_API_URI,
+        {
           method: "POST",
           body: JSON.stringify(playlistSettings),
           headers: getHeaders(),
-        });
+        }
+      );
 
-        const method = playlistCreationResponse.ok ? "success" : "error";
-        const message = playlistCreationResponse.ok
-          ? "Playlist created"
-          : "Unexpected error occurred. Please try again later.";
-        toast[method](message);
+      if (playlistCreationResponse.ok) {
         response.success = true;
-      } finally {
-        setLoading(false);
       }
 
       return response;

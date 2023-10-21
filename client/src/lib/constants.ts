@@ -5,3 +5,6 @@ export const SETTINGS_API_URI =
 
 export const CREATE_PLAYLIST_API_URI =
   process.env.REACT_APP_CREATE_PLAYLIST_API_URI || "/api/playlists";
+
+export const DELETE_ACCOUNT_API_URI =
+  process.env.REACT_APP_DELETE_ACCOUNT_API_URI || "/api/settings/deleteAccount";

@@ -1,26 +1,42 @@
 import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
+import { getHeaders } from "../../lib/getHeaders";
 
 export const useAPI = () => {
   const [loading, setLoading] = useState(false);
   const makeRequest = useCallback(
-    async (url: string, options: Record<string, any>) => {
-      const response = { success: false };
-      setLoading(true);
-      try {
-        const apiResponse = await fetch(url, options);
-
-        const method = apiResponse.ok ? "success" : "error";
-        const message = apiResponse.ok
-          ? options.toastSuccessMessage
-          : options.toastErrorMessage;
-        toast[method](message);
-        response.success = true;
-      } finally {
-        setLoading(false);
+    async (
+      url: string,
+      options?: Record<string, any>
+    ): ReturnType<typeof fetch> => {
+      const requestOptions = options || {};
+      if (!requestOptions.headers) {
+        requestOptions.headers = getHeaders();
       }
 
-      return response;
+      setLoading(true);
+      const responsePromise = fetch(url, requestOptions);
+      responsePromise
+        .then((apiResponse) => {
+          const method = apiResponse.ok ? "success" : "error";
+          const message = apiResponse.ok
+            ? requestOptions.toastSuccessMessage
+            : requestOptions.toastErrorMessage;
+
+          if (message) {
+            toast[method](message);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+
+          if (requestOptions.toastErrorMessage) {
+            toast.error(requestOptions.toastErrorMessage);
+          }
+        })
+        .finally(() => setLoading(false));
+
+      return responsePromise;
     },
     []
   );

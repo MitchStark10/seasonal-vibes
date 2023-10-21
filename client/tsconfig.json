@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5",
+    "target": "esnext",
     "allowJs": true,
     "checkJs": false,
     "jsx": "react-jsx",
@@ -16,4 +16,3 @@
   },
   "include": ["./src/**/*"]
 }
-
