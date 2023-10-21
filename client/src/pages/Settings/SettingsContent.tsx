@@ -9,10 +9,10 @@ import {
   styled,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Modal } from "../../components/Modal";
 import { useCreatePlaylist } from "../../hooks/api/useCreatePlaylist";
 import { Settings } from "../../hooks/api/useSettings";
 import { useOutsideClick } from "../../hooks/useClickOutside";
+import { DeleteAccountModal } from "./DeleteAccountModal";
 
 interface Props {
   settings: Settings;
@@ -135,24 +135,10 @@ export const SettingsContent: React.FC<Props> = ({
           account in any way.
         </Typography>
       </div>
-      <Modal open={isShowingDeleteConfirmation}>
-        <>
-          Are you sure you want to delete your account? This action cannot be
-          undone.
-          <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-            <Button variant="outlined" color="error">
-              Yes, delete my account
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setShowDeleteConfirmation(false)}
-            >
-              Cancel
-            </Button>
-          </div>
-        </>
-      </Modal>
+      <DeleteAccountModal
+        open={isShowingDeleteConfirmation}
+        onClose={() => setShowDeleteConfirmation(false)}
+      />
     </SettingsContentContainer>
   );
 };
