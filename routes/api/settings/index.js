@@ -6,7 +6,7 @@ const app = express();
 
 app.use(authMiddleware);
 
-app.use("deleteAccount", deleteUserRoute);
+app.use("/deleteAccount", deleteUserRoute);
 
 app.get("/", async (req, res) => {
   const settings = await res.locals.quarterlyVibesUser.getSettings();
