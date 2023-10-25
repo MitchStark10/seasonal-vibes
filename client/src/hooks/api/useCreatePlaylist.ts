@@ -18,6 +18,8 @@ export const useCreatePlaylist = () => {
           method: "POST",
           body: JSON.stringify(playlistSettings),
           headers: getHeaders(),
+          toastSuccessMessage: "Playlist generated successfully.",
+          toastErrorMessage: "Playlist not generated. Please try again later.",
         }
       );
 
