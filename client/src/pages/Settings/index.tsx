@@ -10,12 +10,26 @@ const SettingsContainer = styled("div")({
   height: "100%",
 });
 
+interface SubscriptionChangePayload {
+  key: "isSubscribed";
+  value: boolean;
+}
+
+interface QuantityOfSongsPerPlaylistChangePayload {
+  key: "quantityOfSongsPerPlaylist";
+  value: number;
+}
+
+export type ChangePayload =
+  | SubscriptionChangePayload
+  | QuantityOfSongsPerPlaylistChangePayload;
+
 export const Settings = () => {
   const { settings, saveSettings } = useSettings();
 
-  const handleSubscriptionChange = (isSubscribed: boolean) => {
+  const handleSettingsChange = (changePayload: ChangePayload) => {
     if (settings) {
-      saveSettings({ ...settings, isSubscribed });
+      saveSettings({ ...settings, [changePayload.key]: changePayload.value });
     }
   };
 
@@ -25,7 +39,7 @@ export const Settings = () => {
       {settings ? (
         <SettingsContent
           settings={settings}
-          handleSubscriptionChange={handleSubscriptionChange}
+          handleSettingsChange={handleSettingsChange}
         />
       ) : (
         <CircularProgress aria-label="Loading settings" />

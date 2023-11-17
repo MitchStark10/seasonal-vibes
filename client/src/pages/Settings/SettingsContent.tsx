@@ -13,6 +13,7 @@ import {
   styled,
 } from "@mui/material";
 import React, { useState } from "react";
+import { ChangePayload } from ".";
 import { useCreatePlaylist } from "../../hooks/api/useCreatePlaylist";
 import { Settings } from "../../hooks/api/useSettings";
 import { useOutsideClick } from "../../hooks/useClickOutside";
@@ -20,7 +21,7 @@ import { DeleteAccountModal } from "./DeleteAccountModal";
 
 interface Props {
   settings: Settings;
-  handleSubscriptionChange: (isSubscribed: boolean) => void;
+  handleSettingsChange: (changePayload: ChangePayload) => void;
 }
 
 const SettingsContentContainer = styled("div")({
@@ -53,7 +54,7 @@ const Divider = styled("hr")({
 
 export const SettingsContent: React.FC<Props> = ({
   settings,
-  handleSubscriptionChange,
+  handleSettingsChange,
 }) => {
   const [isShowingNewPlaylistForm, setIsShowingNewPlaylistForm] =
     useState(false);
@@ -95,7 +96,12 @@ export const SettingsContent: React.FC<Props> = ({
           control={
             <Switch
               checked={settings.isSubscribed}
-              onChange={(e) => handleSubscriptionChange(e.target.checked)}
+              onChange={(e) =>
+                handleSettingsChange({
+                  key: "isSubscribed",
+                  value: e.target.checked,
+                })
+              }
             />
           }
           label="Subscribed to monthly playlists"
@@ -106,7 +112,12 @@ export const SettingsContent: React.FC<Props> = ({
             <Select
               label="Quantity of Songs per Playlist"
               value={settings.quantityOfSongsPerPlaylist || 25}
-              onChange={() => console.log("todo")}
+              onChange={(ev) => {
+                handleSettingsChange({
+                  key: "quantityOfSongsPerPlaylist",
+                  value: Number(ev.target.value),
+                });
+              }}
               size="small"
             >
               <MenuItem value={10}>10</MenuItem>
