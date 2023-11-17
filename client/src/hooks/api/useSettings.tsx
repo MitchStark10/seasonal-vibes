@@ -5,6 +5,7 @@ import { useAPI } from "./useAPI";
 export interface Settings {
   isSubscribed: boolean;
   nextPlaylistCreationDate: string;
+  quantityOfSongsPerPlaylist: number;
 }
 
 // There's currently no need for state management, since the settings
