@@ -151,7 +151,7 @@ export const SettingsContent: React.FC<Props> = ({
                 variant="outlined"
                 size="small"
               >
-                {loading ? <CircularProgress /> : "Create"}
+                {loading ? <CircularProgress size="20px" /> : "Create"}
               </Button>
               <Button
                 onClick={resetNewPlaylistFormState}
