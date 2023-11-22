@@ -17,7 +17,6 @@ const monthNames = [
 
 const d = new Date();
 const currentMonthName = monthNames[d.getMonth()];
-const currentYear = d.getFullYear();
 
 export const createScheduledPlaylist = async () => {
   console.log(
@@ -34,5 +33,3 @@ export const createScheduledPlaylist = async () => {
     });
   }
 };
-
-createScheduledPlaylist();

@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cron from "node-cron";
 import path from "path";
+import { createScheduledPlaylist } from "./cron/createScheduledPlaylist.js";
 import { __dirname } from "./dirname.js";
 import apiRouter from "./routes/api/index.js";
 
@@ -30,8 +31,17 @@ app.get("*", (_req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
-cron.schedule("* * * * *", () => {
-  console.log("running cron job!");
+cron.schedule("0 8 * * *", async () => {
+  const currentDate = new Date();
+  const lastDayOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  ).getDate();
+
+  if (currentDate.getDate() === lastDayOfMonth) {
+    await createScheduledPlaylist();
+  }
 });
 
 const PORT = process.env.PORT || 3000;
