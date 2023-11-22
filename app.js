@@ -1,5 +1,6 @@
 import cookieParser from "cookie-parser";
 import express from "express";
+import cron from "node-cron";
 import path from "path";
 import { __dirname } from "./dirname.js";
 import apiRouter from "./routes/api/index.js";
@@ -29,6 +30,9 @@ app.get("*", (_req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
-const PORT = process.env.PORT || 3000;
+cron.schedule("* * * * *", () => {
+  console.log("running cron job!");
+});
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
