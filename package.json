@@ -8,7 +8,6 @@
     "dev": "concurrently --kill-others \"cross-env PORT=3001 REACT_APP_LOGIN_URL=http://localhost:3000/api/auth/login SETTINGS_API_URI=http://localhost:3000/api/settings npm run dev:client\" \"npm run devStart\"",
     "devStart": "nodemon app",
     "start": "node app",
-    "azureStart": "npm install && npm start",
     "build": "cd client && npm run build",
     "postinstall": "cd client && npm i",
     "generatePlaylists": "node ./cron/createScheduledPlaylist.js"
