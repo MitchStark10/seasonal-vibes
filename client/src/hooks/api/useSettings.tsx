@@ -6,6 +6,7 @@ export interface Settings {
   isSubscribed: boolean;
   nextPlaylistCreationDate: string;
   quantityOfSongsPerPlaylist: number;
+  genreFilters: string[];
 }
 
 // There's currently no need for state management, since the settings
