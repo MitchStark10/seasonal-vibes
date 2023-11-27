@@ -20,9 +20,15 @@ interface QuantityOfSongsPerPlaylistChangePayload {
   value: number;
 }
 
+interface GenreFilterChangePayload {
+  key: "genreFilters";
+  value: string[];
+}
+
 export type ChangePayload =
   | SubscriptionChangePayload
-  | QuantityOfSongsPerPlaylistChangePayload;
+  | QuantityOfSongsPerPlaylistChangePayload
+  | GenreFilterChangePayload;
 
 export const Settings = () => {
   const { settings, saveSettings } = useSettings();

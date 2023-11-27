@@ -1,5 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
+  Autocomplete,
   Button,
   CircularProgress,
   FormControl,
@@ -18,6 +19,13 @@ import { useCreatePlaylist } from "../../hooks/api/useCreatePlaylist";
 import { Settings } from "../../hooks/api/useSettings";
 import { useOutsideClick } from "../../hooks/useClickOutside";
 import { DeleteAccountModal } from "./DeleteAccountModal";
+
+const GENRE_FILTER_OPTIONS = [
+  {
+    title: "Piano",
+    value: "piano",
+  },
+];
 
 interface Props {
   settings: Settings;
@@ -126,6 +134,20 @@ export const SettingsContent: React.FC<Props> = ({
             </Select>
           </FormControl>
         </div>
+        <Autocomplete
+          label="Genres to Filter"
+          placeholder="Genres to Filter"
+          multiple={true}
+          size="small"
+          value={settings.genreFilters}
+          options={GENRE_FILTER_OPTIONS}
+          onChange={(e, value) => {
+            handleSettingsChange({
+              key: "genreFilters",
+              value: value as string[],
+            });
+          }}
+        />
         <div>
           {!isShowingNewPlaylistForm && (
             <Button
