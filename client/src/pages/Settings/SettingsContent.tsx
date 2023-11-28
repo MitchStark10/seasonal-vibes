@@ -88,6 +88,10 @@ export const SettingsContent: React.FC<Props> = ({
     }
   };
 
+  const currentGenreFilterSelections = GENRE_FILTER_OPTIONS.filter((option) =>
+    settings.genreFilters.includes(option.value)
+  );
+
   return (
     <SettingsContentContainer>
       <ConfigurableSettingsContainer>
@@ -99,7 +103,6 @@ export const SettingsContent: React.FC<Props> = ({
             )}
           </Typography>
         )}
-
         <FormControlLabel
           control={
             <Switch
@@ -135,16 +138,16 @@ export const SettingsContent: React.FC<Props> = ({
           </FormControl>
         </div>
         <Autocomplete
-          label="Genres to Filter"
           placeholder="Genres to Filter"
-          multiple={true}
           size="small"
-          value={settings.genreFilters}
+          multiple
+          value={currentGenreFilterSelections}
           options={GENRE_FILTER_OPTIONS}
+          renderInput={(params) => <TextField {...params} label="Movie" />}
           onChange={(e, value) => {
             handleSettingsChange({
               key: "genreFilters",
-              value: value as string[],
+              value: value.map((option) => option.value),
             });
           }}
         />
