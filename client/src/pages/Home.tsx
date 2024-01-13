@@ -56,12 +56,6 @@ export const Home = () => {
         <Typography fontSize="28px" fontWeight="bold" margin="10px 0">
           Personalized, Automated Monthly Playlists
         </Typography>
-        <Typography fontSize="20px" marginTop="10px" marginBottom="20px">
-          Immortalize your current music mood with automatically generated
-          playlists based on your most played songs of each month. Follow these
-          two quick and simple steps, and we&apos;ll take care of creating your
-          playlist on the final day of every month!
-        </Typography>
         <NumberedListItemContainer sx={{ marginBottom: "30px" }}>
           <NumberedListItem number={1}>
             Sign in with Spotify using the link below
